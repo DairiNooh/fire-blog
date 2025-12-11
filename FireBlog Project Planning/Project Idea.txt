@@ -1,0 +1,3 @@
+Project Idea
+
+The project app will be of a blogging type. User can register and login using a unique username and password. Users can place blogs of anything that comes to their mind. Blogs can be viewed by all other users. Other users can interact with blog posts by adding comments or liking the post. Users who created their blog post can edit the blog or delete it whenever they want. If the user deletes their blog post all other information including the comments and likes of that post will be deleted too.

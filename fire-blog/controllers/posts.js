@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Post = require('../models/post');
+const Comment = require('../models/comment');
 const isSignedIn = require('../middleware/is-signed-in');
 
 module.exports = router;
@@ -56,7 +57,7 @@ router.put('/:id', isSignedIn, async (req,res)=>{
     const isOwner = post.creator_id.equals(req.session.user._id);
     if(isOwner)
     {
-        await Post.updateOne(req.body);
+        await post.updateOne(req.body);
         res.redirect(`/posts/${req.params.id}`);
     }
     else
@@ -91,7 +92,8 @@ router.get('/:id', async (req, res) => {
     try
     {
         const post = await Post.findById(req.params.id).populate('creator_id');
-        res.render('posts/show.ejs', {post});
+        const postComments = await Comment.find({ post_id: post._id }).populate('creator_id');
+        res.render('posts/show.ejs', {post, postComments});
     }
     catch(err)
     {

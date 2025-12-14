@@ -37,3 +37,52 @@ router.post('/', isSignedIn, async (req, res) => {
         console.log(err);
     }
 });
+
+router.get('/:id/edit', isSignedIn, async (req, res) => {
+  try {
+
+    const post = await Post.findById(req.params.id);
+
+
+    res.render('posts/edit.ejs', {post});
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+  }
+});
+
+router.put('/:id', isSignedIn, async (req,res)=>{
+    const post = await Post.findById(req.params.id);
+    const isOwner = post.creator_id.equals(req.session.user._id);
+    if(isOwner)
+    {
+        await Post.updateOne(req.body);
+        res.redirect(`/posts/${req.params.id}`);
+    }
+    else
+    {
+        res.redirect(`/posts/${req.params.id}`);
+    }
+});
+
+router.delete('/:id', async(req,res)=>{
+    try
+    {
+        const listing = await Listing.findById(req.params.id);
+        const isOwner = listing.owner.equals(req.session.user._id)
+        if(isOwner)
+        {
+            await listing.deleteOne();
+            res.redirect('/listings');
+        }
+        else
+        {
+            throw new Error("Permission Denied to delete"); // this triggers the catch block
+        }
+    }
+    catch(err)
+    {
+        console.log(err);
+        res.redirect('/');
+    }
+});

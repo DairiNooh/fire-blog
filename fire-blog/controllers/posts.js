@@ -7,8 +7,18 @@ const isSignedIn = require('../middleware/is-signed-in');
 module.exports = router;
 
 //
-router.get('/', (req, res)=>{
-    res.send("The route is working");
+router.get('/', async (req, res)=>{
+    try
+    {
+        const getAllPosts = await Post.find().populate('creator_id');
+        res.render('posts/index.ejs',{getAllPosts});
+        
+    }
+    catch(err)
+    {
+        console.log(err);
+        res.redirect('/');
+    }
 });
 
 router.get('/new', isSignedIn,(req, res)=>{

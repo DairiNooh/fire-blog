@@ -68,12 +68,12 @@ router.put('/:id', isSignedIn, async (req,res)=>{
 router.delete('/:id', async(req,res)=>{
     try
     {
-        const listing = await Listing.findById(req.params.id);
-        const isOwner = listing.owner.equals(req.session.user._id)
+        const post = await Post.findById(req.params.id);
+        const isOwner = post.creator_id.equals(req.session.user._id)
         if(isOwner)
         {
-            await listing.deleteOne();
-            res.redirect('/listings');
+            await post.deleteOne();
+            res.redirect('/posts');
         }
         else
         {
@@ -84,5 +84,18 @@ router.delete('/:id', async(req,res)=>{
     {
         console.log(err);
         res.redirect('/');
+    }
+});
+
+router.get('/:id', async (req, res) => {
+    try
+    {
+        const post = await Post.findById(req.params.id).populate('creator_id');
+        res.render('posts/show.ejs', {post});
+    }
+    catch(err)
+    {
+        console.log(err);
+        res.redirect('/posts');
     }
 });

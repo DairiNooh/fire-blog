@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1>Show page</h1>
+
+<h2>Details</h2>
+<p><%= post.title %></p>
+<p><%= post.content %></p>
+
+<form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+  <button type="submit">Delete this post</button>
+</form>
+
+<a href="/posts/<%= post._id %>/edit">Edit this post</a>
+
+</body>
+
+
+</body>
+</html>

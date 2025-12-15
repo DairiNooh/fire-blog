@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const likesSchema = require('./likeSchema');
 
 // we need mongoose schema
 const commentSchema = mongoose.Schema({
@@ -18,6 +19,8 @@ const commentSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
+
+  likes: [likesSchema],
 });
 // then we register the model with mongoose
 const Comment = mongoose.model('Comment', commentSchema);

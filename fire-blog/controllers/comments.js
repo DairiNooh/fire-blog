@@ -69,3 +69,31 @@ router.delete('/:id', async(req,res)=>{
         res.redirect('/');
     }
 });
+
+// Like/unlike a comment
+router.post('/:id/like', isSignedIn, async (req, res) => {
+  try {
+    const comment = await Comment.findById(req.params.id);
+
+    if (!comment) return res.redirect('/');
+
+    const userId = req.session.user._id;
+
+    // check if user already liked the comment
+    const alreadyLiked = comment.likes.some(like => like.user_id.equals(userId));
+
+    if (alreadyLiked) {
+      // unlike
+      comment.likes = comment.likes.filter(like => !like.user_id.equals(userId));
+    } else {
+      // like
+      comment.likes.push({ user_id: userId });
+    }
+
+    await comment.save();
+    res.redirect(`/posts/${comment.post_id}`);
+  } catch (err) {
+    console.log(err);
+    res.redirect('/');
+  }
+});

@@ -51,7 +51,7 @@ router.put('/:id', isSignedIn, async (req,res)=>{
 router.delete('/:id', async(req,res)=>{
     try
     {
-        const comment = await COmment.findById(req.params.id);
+        const comment = await Comment.findById(req.params.id);
         const isOwner = comment.creator_id.equals(req.session.user._id)
         if(isOwner)
         {

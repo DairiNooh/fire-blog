@@ -48,6 +48,21 @@
   <p><a href="/auth/sign-in">Sign in</a> to comment</p>
 <% } %>
 
+<p>👍 Likes: <%= post.likes.length %></p>
+
+<% if (user) { %>
+  <% const liked = post.likes.some(like => like.user_id.equals(user._id)) %>
+
+  <form action="/posts/<%= post._id %>/like" method="POST">
+    <button type="submit">
+      <%= liked ? 'Unlike' : 'Like' %>
+    </button>
+  </form>
+<% } else { %>
+  <p><a href="/auth/sign-in">Sign in</a> to like this post</p>
+<% } %>
+
+
 
 </body>
 

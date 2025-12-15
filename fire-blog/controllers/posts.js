@@ -101,3 +101,36 @@ router.get('/:id', async (req, res) => {
         res.redirect('/posts');
     }
 });
+
+router.post('/:id/like', isSignedIn, async (req, res) => {
+    try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.redirect('/posts');
+    }
+
+    const userId = req.session.user._id;
+
+    // check if user already liked the posst
+    const alreadyLiked = post.likes.some(
+      (like) => like.user_id.equals(userId)
+    );
+
+    if (alreadyLiked) {
+      // unlieks if the post is already liekd
+      post.likes = post.likes.filter(
+        (like) => !like.user_id.equals(userId)
+      );
+    } else {
+      // thhis on e makes the post like
+      post.likes.push({ user_id: userId });
+    }
+
+    await post.save();
+    res.redirect(`/posts/${post._id}`);
+  } catch (err) {
+    console.log(err);
+    res.redirect('/posts');
+  }
+});

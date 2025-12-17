@@ -30,7 +30,7 @@ html, body {
 /* NAVBAR */
 #home-nav {
     height: 10%;
-    background-color: #0b3d91;
+    background-color: rgba(5, 15, 40, 0.85);
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -44,7 +44,7 @@ html, body {
 }
 
 .nav-links a {
-    color: #00bfff;
+    color: grey;
     text-decoration: none;
     font-weight: bold;
 }
@@ -53,6 +53,12 @@ html, body {
 #home-main {
     flex: 1;
     padding: 45px 70px;
+
+     /* Background image */
+    background-image: url('/img/image5.png'); /* put your image in public/img */
+    background-size: cover;       /* cover entire area */
+    background-position: center;  /* center the image */
+    background-repeat: no-repeat;
 }
 
 /* POSTS CONTAINER */

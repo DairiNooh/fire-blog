@@ -26,11 +26,12 @@ router.post('/sign-up', async (req, res) => {
     const userInDatabase = await User.findOne({ username });
 
     if (userInDatabase) {
-      return res.send('Username or Password is invalid');
+      return res.redirect('/auth/sign-up');
+
     }
     // validate the passwords match
     if (password !== confirmPassword) {
-      return res.send('Username or Password is invalid');
+      return res.redirect('/auth/sign-up');
     }
     // take the password and encrypt in some way.
     const hashPassword = bcrypt.hashSync(password, 10);
@@ -70,14 +71,14 @@ router.post('/sign-in', async (req, res) => {
 
     // if the user does not exist, redirect to sign up with msg
     if (!userInDatabase) {
-      return res.send('Username or Password is invalid');
+      return res.redirect('/auth/sign-in');
     }
     // i the user exists, lets compare the pw with the usr pw
 
     const isValidPassword = bcrypt.compareSync(password, userInDatabase.password);
     // if the pw doesnt match, throw an error
     if (!isValidPassword) {
-      return res.send('Username or Password is invalid');
+      return res.redirect('/auth/sign-in');
     }
 
     // else continue with the "login"

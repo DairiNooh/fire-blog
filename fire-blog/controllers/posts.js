@@ -39,6 +39,21 @@ router.post('/', isSignedIn, async (req, res) => {
     }
 });
 
+// MY POSTS (only logged-in user's posts)
+router.get('/my-posts', isSignedIn, async (req, res) => {
+  try {
+    const myPosts = await Post.find({
+      creator_id: req.session.user._id
+    }).populate('creator_id');
+
+    res.render('posts/index.ejs', { getAllPosts: myPosts });
+  } catch (err) {
+    console.log(err);
+    res.redirect('/');
+  }
+});
+
+
 router.get('/:id/edit', isSignedIn, async (req, res) => {
   try {
 

@@ -39,7 +39,7 @@ router.post('/', isSignedIn, async (req, res) => {
     }
 });
 
-// MY POSTS (only logged-in user's posts)
+
 router.get('/my-posts', isSignedIn, async (req, res) => {
   try {
     const myPosts = await Post.find({
@@ -68,16 +68,23 @@ router.get('/:id/edit', isSignedIn, async (req, res) => {
 });
 
 router.put('/:id', isSignedIn, async (req,res)=>{
-    const post = await Post.findById(req.params.id);
-    const isOwner = post.creator_id.equals(req.session.user._id);
-    if(isOwner)
+    try
     {
-        await post.updateOne(req.body);
-        res.redirect(`/posts/${req.params.id}`);
+      const post = await Post.findById(req.params.id);
+      const isOwner = post.creator_id.equals(req.session.user._id);
+      if(isOwner)
+      {
+          await post.updateOne(req.body);
+          res.redirect(`/posts/${req.params.id}`);
+      }
+      else
+      {
+          res.redirect(`/posts/${req.params.id}`);
+      }
     }
-    else
+    catch(err)
     {
-        res.redirect(`/posts/${req.params.id}`);
+      res.redirect('/');
     }
 });
 

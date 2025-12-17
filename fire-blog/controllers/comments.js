@@ -35,16 +35,23 @@ router.get('/:id/edit', isSignedIn, async (req, res) => {
 });
 
 router.put('/:id', isSignedIn, async (req,res)=>{
-    const comment = await Comment.findById(req.params.id);
-    const isOwner = comment.creator_id.equals(req.session.user._id);
-    if(isOwner)
+    try
     {
-        await comment.updateOne(req.body);
-        res.redirect(`/posts/${comment.post_id}`);
+      const comment = await Comment.findById(req.params.id);
+      const isOwner = comment.creator_id.equals(req.session.user._id);
+      if(isOwner)
+      {
+          await comment.updateOne(req.body);
+          res.redirect(`/posts/${comment.post_id}`);
+      }
+      else
+      {
+          res.redirect(`/posts/${req.params.id}`);
+      }
     }
-    else
+    catch(err)
     {
-        res.redirect(`/posts/${req.params.id}`);
+      res.redirect('/');
     }
 });
 
@@ -60,7 +67,7 @@ router.delete('/:id', async(req,res)=>{
         }
         else
         {
-            throw new Error("Permission Denied to delete"); // this triggers the catch block
+            throw new Error("Permission Denied to delete");
         }
     }
     catch(err)
@@ -70,7 +77,6 @@ router.delete('/:id', async(req,res)=>{
     }
 });
 
-// Like/unlike a comment
 router.post('/:id/like', isSignedIn, async (req, res) => {
   try {
     const comment = await Comment.findById(req.params.id);

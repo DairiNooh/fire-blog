@@ -1,28 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Posts</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #0a0a0a;
+    overflow-x: hidden;
+}
+
+/* PAGE WRAPPER */
+#home-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* NAVBAR */
+#home-nav {
+    height: 10%;
+    background-color: #0b3d91;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: #00bfff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* MAIN CONTENT */
+#home-main {
+    flex: 1;
+    padding: 45px 70px;
+}
+
+/* POSTS CONTAINER */
+.posts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+}
+
+/* POST CARD */
+.box {
+    width: 320px;
+    height: 210px;
+    background-color: rgba(5, 15, 40, 0.85);
+    border: 1px solid rgba(0, 191, 255, 0.35);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+}
+
+/* TITLE */
+.box h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    color: #00bfff;
+}
+
+/* CONTENT */
+.box p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #e0e0e0;
+    overflow: hidden;
+}
+
+/* READ MORE */
+.box a {
+    margin-top: auto;
+    color: #00bfff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.box a:hover {
+    text-decoration: underline;
+}
+</style>
 </head>
+
 <body>
-    <%- include('../partials/_navbar.ejs') %>
-    <h1>Post index page</h1>
-    <a href="/posts/new">Add a New Post</a>
 
+<div id="home-container">
 
-    <ul>
-    <% getAllPosts.forEach((post) => { %>
-    <li>
+    <!-- NAVBAR -->
+    <div id="home-nav">
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts">Posts</a></li>
+            <li><a href="/posts/mine">My Posts</a></li>
+            <li><a href="/auth/sign-in">Sign In</a></li>
+        </ul>
+    </div>
 
-<%= post.title%>.
-<%= post.content%>.
-<a href="/posts/<%= post._id %>">See Details</a>
+    <!-- MAIN -->
+    <div id="home-main">
 
-        
-    </li>
-    <% }) %>
-    </ul>
+        <div class="posts-container">
+            <% getAllPosts.forEach((post) => { %>
+                <div class="box">
+                    <h3><%= post.title %></h3>
+                    <p><%= post.content %></p>
+                    <a href="/posts/<%= post._id %>">Read more →</a>
+                </div>
+            <% }) %>
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>

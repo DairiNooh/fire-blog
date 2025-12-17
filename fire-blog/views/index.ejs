@@ -97,7 +97,12 @@
                 <li><a href="/posts">Posts</a></li>
                 <li><a href="/posts/my-posts">My Posts</a></li>
                 <li><a href="/posts/new">New Post</a></li>
-                <li><a href="/auth/sign-in">Sign In</a></li>
+                <% if (user) { %>
+  <li><a href="/auth/sign-out">Sign Out</a></li>
+<% } else { %>
+  <li><a href="/auth/sign-in">Sign In</a></li>
+<% } %>
+
             </ul>
         </div>
 

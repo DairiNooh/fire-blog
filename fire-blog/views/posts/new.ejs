@@ -1,20 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Post</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #0a0a0a;
+    color: #ffffff;
+}
+
+/* NAVBAR */
+#home-nav {
+    height: 70px;
+    width: 100%;
+    background-color: #0b3d91;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: #00bfff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* PAGE WRAPPER */
+.page-wrapper {
+    min-height: calc(100% - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+/* FORM CONTAINER */
+.form-container {
+    width: 500px; /* smaller width */
+    background-color: rgba(5, 15, 40, 0.9);
+    padding: 35px; /* smaller padding */
+    border: 1px solid rgba(0, 191, 255, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* smaller gap */
+}
+
+/* TITLE */
+.form-container h1 {
+    color: #00bfff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* LABELS */
+label {
+    font-size: 1rem;
+    color: #b0cfff;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* INPUTS */
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(0, 191, 255, 0.35);
+    background-color: #050f28;
+    color: #fff;
+    font-size: 1rem;
+    resize: none; /* prevent resizing */
+    margin-bottom: 12px; /* spacing after each input */
+}
+
+/* Make textarea a bit smaller */
+textarea {
+    height: 120px; 
+}
+
+/* BUTTON */
+button {
+    padding: 10px 16px;
+    border: none;
+    background-color: #00bfff;
+    color: #000;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: 0.2s;
+    margin-top: 10px; /* spacing above button */
+}
+
+button:hover {
+    background-color: #009acd;
+}
+</style>
 </head>
 <body>
-    <h1>new Post</h1>
-    <form action="/posts" method="POST">
-        <label for="title">Title:</label>
-        <input type="string" name="title" id="title" required>
 
-        <label for="content">Content:</label>
-        <input type="string" name="content" id="content" required>
+<!-- NAV -->
+<div id="home-nav">
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/posts">Posts</a></li>
+        <% if (user) { %>
+            <li><a href="/posts/my-posts">My Posts</a></li>
+            <li><a href="/auth/sign-out">Sign Out</a></li>
+        <% } else { %>
+            <li><a href="/auth/sign-in">Sign In</a></li>
+            <li><a href="/auth/sign-up">Sign Up</a></li>
+        <% } %>
+    </ul>
+</div>
 
-        <button type="submit">Add New Post</button>
-    </form>
+<!-- CENTERED FORM -->
+<div class="page-wrapper">
+    <div class="form-container">
+        <h1>New Post</h1>
+        <form action="/posts" method="POST">
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="title" required>
+
+            <label for="content">Content:</label>
+            <textarea name="content" id="content" required></textarea>
+
+            <button type="submit">Add New Post</button>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>

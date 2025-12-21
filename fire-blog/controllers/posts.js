@@ -17,7 +17,7 @@ router.get('/', async (req, res)=>{
     }
     catch(err)
     {
-        console.log(err);
+        
         res.redirect('/');
     }
 });
@@ -35,7 +35,7 @@ router.post('/', isSignedIn, async (req, res) => {
     }
     catch(err)
     {
-        console.log(err);
+        res.redirect('/');
     }
 });
 
@@ -48,7 +48,7 @@ router.get('/my-posts', isSignedIn, async (req, res) => {
 
     res.render('posts/index.ejs', { getAllPosts: myPosts });
   } catch (err) {
-    console.log(err);
+    
     res.redirect('/');
   }
 });
@@ -62,7 +62,7 @@ router.get('/:id/edit', isSignedIn, async (req, res) => {
 
     res.render('posts/edit.ejs', {post});
   } catch (error) {
-    console.log(error);
+    
     res.redirect('/');
   }
 });
@@ -105,7 +105,7 @@ router.delete('/:id', async(req,res)=>{
     }
     catch(err)
     {
-        console.log(err);
+        
         res.redirect('/');
     }
 });
@@ -119,7 +119,7 @@ router.get('/:id', async (req, res) => {
     }
     catch(err)
     {
-        console.log(err);
+        
         res.redirect('/posts');
     }
 });
@@ -152,7 +152,7 @@ router.post('/:id/like', isSignedIn, async (req, res) => {
     await post.save();
     res.redirect(`/posts/${post._id}`);
   } catch (err) {
-    console.log(err);
+    
     res.redirect('/posts');
   }
 });

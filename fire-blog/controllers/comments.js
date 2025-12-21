@@ -16,7 +16,7 @@ try {
 
     res.redirect(`/posts/${req.body.post_id}`); // go back to the post page
   } catch (err) {
-    console.log(err);
+    
     res.redirect('/');
   }
 });
@@ -29,7 +29,7 @@ router.get('/:id/edit', isSignedIn, async (req, res) => {
 
     res.render('comments/edit.ejs', {comment});
   } catch (error) {
-    console.log(error);
+    
     res.redirect('/');
   }
 });
@@ -72,7 +72,7 @@ router.delete('/:id', async(req,res)=>{
     }
     catch(err)
     {
-        console.log(err);
+        
         res.redirect('/');
     }
 });
@@ -99,7 +99,7 @@ router.post('/:id/like', isSignedIn, async (req, res) => {
     await comment.save();
     res.redirect(`/posts/${comment.post_id}`);
   } catch (err) {
-    console.log(err);
+    
     res.redirect('/');
   }
 });

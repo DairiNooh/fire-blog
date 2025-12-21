@@ -104,6 +104,12 @@ html, body {
     gap: 6px;
 }
 
+
+.like-btn span {
+    color: #ffffff;
+}
+
+
 .bi-heart {
     color: #00bfff;
 }

@@ -1,89 +1,48 @@
-<h1>
-  <span class="headline">New Project</span>
-  <span class="subhead">Setup</span>
-</h1>
+# FireBlog
 
-## Setup
+## Blog Description & Background
 
-Open your Terminal application and navigate to your projects directory:
+FireBlog is a full-stack blog application focused on emerging technologies such as Artificial Intelligence, Blockchain, Robotics, and next-generation software trends. The platform supports full CRUD operations for blog posts, comments, and likes, allowing users to interact with content in a dynamic way.
 
-## Cloning the Auth boilerplate
+I created this project to strengthen my backend and database skills using Node.js and MongoDB, while building a real-world blog application that shares knowledge about modern and future technologies.
 
-This template uses the [`MEN Stack Auth Template`](https://git.generalassemb.ly/modular-curriculum-all-courses/men-stack-session-auth-template) as starter code. Doing so allows us to have a connection established to our MongoDB Atlas, add functioning auth for our user model, and install some of the packages we will need for our app build.
+---
 
-Navigate to the [MEN Stack Auth Template](https://github.com/SEB-11-BH/MEN-AUTH-TEMPLATE.git) and clone the repository to your machine and rename the folder to your desired project name by running the following command in your terminal.
+## Getting Started
 
-**Be sure to replace `<YOUR-PROJECT-NAME>` with your desired project name!**:
+**GitHub Repository:**  
+https://github.com/DairiNooh/fire-blog
 
-```bash
-git clone https://github.com/SEB-11-BH/MEN-AUTH-TEMPLATE.git <YOUR-PROJECT-NAME>
-```
+**Note:** The application uses MongoDB for data storage and supports full CRUD functionality for posts, comments, and likes.
 
-Note by adding the `open-house` argument we're cloning the specified repo into a directory called `open-house` on our machines.
+---
 
-Next, `cd` into your renamed directory:
+## Technologies Used
 
-**Be sure to replace `<YOUR-PROJECT-NAME>` with your desired project name!**:
+**Frontend:**  
+- HTML: Used to structure the blog pages  
+- CSS & Bootstrap: Used for layout and styling  
+- Bootstrap Icons: Used for UI icons  
 
-```bash
-cd <YOUR-PROJECT-NAME>
-```
+**Backend:**  
+- Node.js: Server-side runtime  
+- Express.js: Backend framework  
+- MongoDB: Database for posts, comments, and likes  
+- Mongoose: Schema and data modeling  
 
-Finally, remove the existing `.git` information from this template:
+**Version Control:**  
+- Git & GitHub: Used for source control and project management  
 
-```bash
-rm -rf .git
-```
+**Software:**  
+- VS Code: Development environment  
+- Git Bash: Used for Git commands and project management  
+- NPM Libraries: Used to support backend functionality  
 
-> Removing the `.git` info is important as this is just a starter template provided by GA. You do not need the existing git history for this project.
+---
 
-## GitHub setup
+## Planned Future Enhancements
 
-To add this project to GitHub, initialize a new Git repository:
+In the future, I plan to add the following:  
+- Image uploads for blog posts  
+- Improved and consistent color palettes  
 
-```bash
-git init
-git add .
-git commit -m "init commit"
-```
-
-Make a new repository on [GitHub](https://github.com/) for your project.
-
-Link your local project to your remote GitHub repo:
-
-- use the second set of commands that appear on the empty repo to connect your local project to GitHub.
-
-> 🚨 Do not copy the above command. It will not work. Your GitHub username will replace `<github-username>` (including the `<` and `>`) in the URL above.
-
-Open the project's folder in your code editor:
-
-```bash
-code .
-```
-
-## Install dependencies
-
-Next, you will want to install all of the packages listed in `package.json`
-
-```bash
-npm i
-```
-
-## Create your .env
-
-Lastly, we want to create `MONGODB_URI` and `SESSION_SECRET` to hold values used in our auth logic.  `MONGODB_URI` will connect to your MongoDB Atlas connection string so you will need to establish one for this application.  `SESSION_SECRET` will aid in your auth session logic.
-
-Add a `.env` file to your application and add the following secret keys to your application:
-
-```text
-MONGODB_URI=
-SESSION_SECRET=
-```
-
-Start the server and you are ready for launch.
-
-```bash
-npm run dev
-```
-
-Happy Coding!
